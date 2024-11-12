@@ -1,0 +1,69 @@
+import { Todo } from "@/types/TodoType";
+import { User } from "@/types/UserType";
+import { create } from "zustand";
+import { data } from "@/mocks/data";
+
+interface AppStore {
+  //user
+  user: User | null;
+  setUser: (user: User) => void;
+  login: (mail: string, password: string) => boolean;
+  logout: () => void;
+
+  // todos
+  todo: Todo[];
+  setTodo: (todo: Todo[]) => void;
+  addTodo: (todo: Todo) => void;
+  editTodo: (id: number) => void;
+  deleteTodo: (id: number) => void;
+}
+
+export const useAppStore = create<AppStore>((set) => ({
+  user: null,
+  todo: [],
+
+  //user
+  setUser: (user) => set({ user }),
+  login: (email, password) => {
+    try {
+      console.log("email", email, "password", password);
+      const foundUser = data.users.find(
+        (user) => user.email === email && user.password === password
+      );
+  
+      if (foundUser) {
+        set({ user: foundUser });
+        return true;
+      }
+  
+      return false; 
+    } catch (error) {
+      console.error("Error en el login:", error); 
+      return false;
+    }
+  },
+  
+  logout: () => set({ user: null }),
+
+  //todos
+  setTodo: (todo) => set({ todo }),
+  addTodo: (todo) => set((state) => ({ todo: [...state.todo, todo] })),
+  editTodo: (id) => {
+    const foundTodo = data.todos.find((todo) => todo.id === id);
+    if (foundTodo) {
+      set({ todo: [foundTodo] });
+      return true;
+    }
+    return false;
+  },
+  deleteTodo: (id) => {
+    const foundTodo = data.todos.find((todo) => todo.id === id);
+    if (foundTodo) {
+      set((state) => ({
+        todo: state.todo.filter((todo) => todo.id !== id),
+      }));
+      return true;
+    }
+    return false;
+  },
+}));
