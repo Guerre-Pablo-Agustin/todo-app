@@ -5,10 +5,18 @@ import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { useFormStatus } from "react-dom";
 import { lusitana } from "@/app/ui/fonts";
 import { useAppStore } from "@/store/appStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import i18n from "../../lib/i18n"
+import { Trans } from "react-i18next";
 
 export default function LoginForm() {
+  const { language } = useAppStore();
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
+
   const { login } = useAppStore();
 
   const router = useRouter();
@@ -24,18 +32,18 @@ export default function LoginForm() {
     event.preventDefault();
     try {
       const result = login(userData.email, userData.password);
-        if (result) {
-          router.push("/panel");
-          setUserData({
-            email: "",
-            password: "",
-          });
-          setError("");
-        } else {
-          setError("Invalid email or password");
-        }   
+      if (result) {
+        router.push("/panel");
+        setUserData({
+          email: "",
+          password: "",
+        });
+        setError("");
+      } else {
+        setError("Invalid email or password");
+      }
     } catch (error) {
-        console.error("Login failed:", error);
+      console.error("Login failed:", error);
       setError("Invalid email or password");
     }
   };
@@ -43,16 +51,21 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
-        <h1 className={` ${lusitana.className} mb-3 text-2xl text-black`}>
-          Please log in to continue.
-        </h1>
+          <h1 className={` ${lusitana.className} mb-3 text-xl text-black`}>
+        <Trans i18nKey="login.presentation">
+          Welcome to the task application. Please login to continue.
+        </Trans>
+          </h1>
+
         <div className="w-full">
           <div>
             <label
               className="mb-3 mt-5 block text-xs font-medium text-gray-900"
               htmlFor="email"
-            >
+              >
+            <Trans i18nKey="login.labelEmail">
               Email
+              </Trans>
             </label>
             <div className="relative">
               <input
@@ -75,7 +88,9 @@ export default function LoginForm() {
               className="mb-3 mt-5 block text-xs font-medium text-gray-900"
               htmlFor="password"
             >
-              Password
+                 <Trans i18nKey="login.labelPassword">
+                
+              </Trans>
             </label>
             <div className="relative">
               <input
@@ -118,7 +133,10 @@ function LoginButton() {
       aria-disabled={pending}
       disabled={pending}
     >
-      Log in <ArrowRightIcon className="h-5 w-5 text-gray-50" />
+        <Trans i18nKey="login.button">
+                Log in
+              </Trans>
+      <ArrowRightIcon className="h-5 w-5 text-gray-50" />
     </button>
   );
 }

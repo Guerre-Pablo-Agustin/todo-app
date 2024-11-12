@@ -1,0 +1,9 @@
+{
+    "login":{
+        "title": "Todo App",
+         "presentation": "Welcome to the task application. Please login to continue.",
+         "button": "Log in",
+         "labelEmail": "Email",
+         "labelPassword": "Password"
+    }
+}

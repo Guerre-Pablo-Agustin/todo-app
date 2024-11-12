@@ -1,0 +1,9 @@
+{
+    "login":{
+        "title": "App de tareas",
+         "presentation": "Bienvenido a la aplicación de tareas. Por favor, inicie sesión para continuar.",
+         "button": "Iniciar sesión",
+         "labelEmail": "Correo",
+         "labelPassword": "Contraseña"
+    }
+}

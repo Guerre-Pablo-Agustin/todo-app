@@ -16,11 +16,20 @@ interface AppStore {
   addTodo: (todo: Todo) => void;
   editTodo: (id: number) => void;
   deleteTodo: (id: number) => void;
+
+
+  //language
+  language: string;
+  setLanguage: (language: string) => void;
 }
 
 export const useAppStore = create<AppStore>((set) => ({
   user: null,
   todo: [],
+  language: "en",
+
+  //language
+  setLanguage: (lang) => set({ language: lang }),
 
   //user
   setUser: (user) => set({ user }),

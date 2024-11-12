@@ -1,21 +1,24 @@
 
-import Logo from '@/components/Login/AppLogo';
-import LoginForm from '@/components/Login/LoginForm';
-import { Metadata } from 'next';
- 
-export const metadata: Metadata = {
-  title: 'Welcome | Acme Dashboard',
-};
+import Logo from "@/components/Login/AppLogo";
+import Header from "@/components/Login/Header";
+import LoginForm from "@/components/Login/LoginForm";
+
+
 export default function LoginPage() {
+
   return (
-    <main className="flex items-center justify-center md:h-screen">
-      <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
-        <div className="flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36">
-          <div className="w-32 text-white md:w-56">
-            <Logo />
-          </div>
+    <main className="flex flex-col items-center justify-center min-h-screen p-6 md:space-x-8">
+      <div className="flex flex-col items-end justify-end w-full  space-y-4 md:mt-0">
+        <Header />
+      </div>
+      <div className="flex flex-col items-center justify-center w-full max-w-md space-y-4 md:mt-0">
+        <div className="flex items-center justify-center h-24 w-full rounded-lg bg-blue-500">
+          <Logo />
         </div>
-        <LoginForm />
+
+        <div className="w-full max-w-md">
+          <LoginForm />
+        </div>
       </div>
     </main>
   );
