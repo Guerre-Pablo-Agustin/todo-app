@@ -9,6 +9,7 @@ interface AppStore {
   setUser: (user: User) => void;
   login: (mail: string, password: string) => boolean;
   logout: () => void;
+  loaduser: () => void;
 
   // todos
   todo: Todo[];
@@ -42,6 +43,7 @@ export const useAppStore = create<AppStore>((set) => ({
   
       if (foundUser) {
         set({ user: foundUser });
+        localStorage.setItem("user", JSON.stringify(foundUser));
         return true;
       }
   
@@ -51,8 +53,18 @@ export const useAppStore = create<AppStore>((set) => ({
       return false;
     }
   },
+
+  loaduser: () => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      set({ user: JSON.parse(user) });
+    }
+  },
   
-  logout: () => set({ user: null }),
+  logout: () => {
+    localStorage.removeItem("user");
+    set({ user: null });
+  },
 
   //todos
   setTodo: (todo) => set({ todo }),

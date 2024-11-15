@@ -9,9 +9,9 @@ export const data: {
     {
       id: 1,
       name: "Juan Pérez",
-      email: "juan.perez@example.com",
+      email: "admin@example.com",
       password: "password123",
-      image: "https://randomuser.me/api/portraits/men/1.jpg",
+      image: "/images/avatars/hombre.jpg",
     },
     {
       id: 2,
