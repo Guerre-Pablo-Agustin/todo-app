@@ -14,8 +14,9 @@ interface AppStore {
   // todos
   todo: Todo[];
   setTodo: (todo: Todo[]) => void;
+  loadTodo: () => void;
   addTodo: (todo: Todo) => void;
-  editTodo: (id: number) => void;
+  editTodo: (id: number, updatedTodo: Partial<Todo>) => void;
   deleteTodo: (id: number) => void;
 
 
@@ -67,24 +68,43 @@ export const useAppStore = create<AppStore>((set) => ({
   },
 
   //todos
-  setTodo: (todo) => set({ todo }),
-  addTodo: (todo) => set((state) => ({ todo: [...state.todo, todo] })),
-  editTodo: (id) => {
-    const foundTodo = data.todos.find((todo) => todo.id === id);
-    if (foundTodo) {
-      set({ todo: [foundTodo] });
-      return true;
-    }
-    return false;
+  setTodo: (todo) => {
+    set({ todo });
+    localStorage.setItem("todos", JSON.stringify(todo));
   },
-  deleteTodo: (id) => {
-    const foundTodo = data.todos.find((todo) => todo.id === id);
-    if (foundTodo) {
-      set((state) => ({
-        todo: state.todo.filter((todo) => todo.id !== id),
-      }));
-      return true;
+
+  loadTodo: () => {
+    const todos = localStorage.getItem("todos");
+    if (todos) {
+      set({ todo: JSON.parse(todos) }); 
+    } else {
+      set({ todo: data.todos }); 
     }
-    return false;
+  },
+
+
+  addTodo: (todo) => {
+    set((state) => {
+      const updatedTodo = [...state.todo, todo]; // Usa el estado actual
+      localStorage.setItem("todos", JSON.stringify(updatedTodo)); // Actualiza localStorage
+      return { todo: updatedTodo }; // Actualiza el estado
+    });
+  },
+  editTodo: (id ,updatedTodo) => {
+    set((state) => {
+      const updatedTodos = state.todo.map((todo) =>
+        todo.id === id ? { ...todo, ...updatedTodo } : todo
+      );
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      return { todo: updatedTodos };
+    });
+  },
+  
+  deleteTodo: (id) => {
+    set((state) => {
+      const updatedTodos = state.todo.filter((todo) => todo.id !== id);
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      return { todo: updatedTodos };
+    });
   },
 }));

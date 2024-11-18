@@ -1,17 +1,16 @@
 "use client";
-import { data } from "@/mocks/data";
 import { useAppStore } from "@/store/appStore";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
 
 const TodoList = () => {
-  const { todo, deleteTodo, setTodo } = useAppStore();
+  const { todo, deleteTodo, loadTodo } = useAppStore();
 
   // Sincroniza los datos iniciales con el estado global
   useEffect(() => {
-    setTodo(data.todos);
-  }, [setTodo]);
+    loadTodo(); // Sincroniza los datos desde localStorage al estado global
+  }, [loadTodo]);
 
   const getStatus = (status: string) => {
     switch (status) {
@@ -50,7 +49,7 @@ const TodoList = () => {
 
   return (
     <div>
-      <table className="w-full">
+      <table className="w-full table-auto">
         <thead className="text-gray-700 text-sm font-medium uppercase">
           <tr>
             <th>ID</th>
@@ -67,7 +66,7 @@ const TodoList = () => {
               <td className="text-sm text-start p-2">{t.title}</td>
               <td className="text-sm text-start p-2">{t.description}</td>
               <td className={`text-sm text-center rounded`}>
-                <p className={`${getStatus(t.status)} py-2 px-4 rounded`}>
+                <p className={`${getStatus(t.status)} py-0.5 px-2 rounded`}>
                   {t.status}
                 </p>
               </td>

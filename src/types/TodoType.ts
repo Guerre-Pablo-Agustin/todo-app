@@ -3,6 +3,6 @@ export interface Todo {
   title: string;
   description: string;
   status: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
