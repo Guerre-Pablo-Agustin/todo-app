@@ -1,7 +1,10 @@
+import KanbanBoard from "@/components/Panel/KanbanBoard/KanbanBoard"
 
 const page = () => {
   return (
-    <div>kanban</div>
+    <section>
+      <KanbanBoard />
+    </section>
   )
 }
 

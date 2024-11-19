@@ -14,8 +14,8 @@ const CreateForm = () => {
     title: "",
     description: "",
     status: "Pendiente",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: "",
+    updatedAt: "",
   });
 
   const handleInputChange = (
@@ -35,8 +35,8 @@ const CreateForm = () => {
     const addnewTodo = {
       ...newTodo,
       id: maxId + 1, 
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
 
     addTodo(addnewTodo);
@@ -53,8 +53,8 @@ const CreateForm = () => {
       title: "",
       description: "",
       status: "Pendiente",
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: "",
+      updatedAt: "",
     });
   };
 
