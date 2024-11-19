@@ -8,12 +8,22 @@ import { useRouter } from "next/navigation";
 import { GlobeAltIcon, PowerIcon } from "@heroicons/react/24/outline";
 import { useAppStore } from "@/store/appStore";
 import { useEffect } from "react";
+import Header from "@/components/Login/Header";
+import i18n from "@/lib/i18n";
+import { Trans } from "react-i18next";
 
 export default function SideNav() {
 
-const {user, loaduser , logout} = useAppStore();
+const {user, loaduser , logout, language} = useAppStore();
   
   const router = useRouter();
+
+  useEffect(() => {
+    if (language) {
+      i18n.changeLanguage(language);
+    }
+  }, [language]);
+
 
  useEffect(() => {
     loaduser();
@@ -33,12 +43,17 @@ const {user, loaduser , logout} = useAppStore();
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2 ">
       <Link
-        className="mb-2 flex h-20 items-end justify-start rounded-md p-4 md:h-40 shadow-md shadow-gray-400 bg-blue-600"
+        className="mb-2 flex h-20 items-end justify-start rounded-md p-4 md:h-20 shadow-md shadow-gray-400 bg-blue-600"
         href="/panel"
       >
-        <div className="w-[70%]  ">
+        <div className="w-[70%] flex flex-row items-center justify-center">
        
         <GlobeAltIcon className="h-12 w-12 rotate-[15deg] text-white" />
+         <p className="hidden md:block text-white font-bold">
+        <Trans i18nKey="panel.sidevar.title">
+          Todo App
+        </Trans>
+          </p>
         </div>
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
@@ -46,7 +61,14 @@ const {user, loaduser , logout} = useAppStore();
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block">
 
 
+
+
         </div>
+
+        <div>
+          <Header />
+        </div>
+
         {user && user.image ? (
           <div className="flex  p-3 md:p-2 md:px-3">
             <Image

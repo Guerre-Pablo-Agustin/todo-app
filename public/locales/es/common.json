@@ -5,5 +5,28 @@
          "button": "Iniciar sesión",
          "labelEmail": "Correo",
          "labelPassword": "Contraseña"
+    },
+
+    "panel":{
+        "sidevar":{
+            "title": "Tareas",
+            "home": "Inicio",
+            "create": "Crear tarea",
+            "kanban": "Tablero Kanban",
+            "sesion": "Cerrar sesión"
+        },
+
+        "table":{
+            "title": "Lista de tareas",
+             "TodoTitle" : "Título",
+             "TodoDescription" : "Descripción",
+             "TodoStatus" : "Estado",
+             "TodoActions" : "Acciones",
+             "TodoDelete" : "Eliminar",
+             "TodoEdit" : "Editar"
+
+        }
     }
+
+
 }

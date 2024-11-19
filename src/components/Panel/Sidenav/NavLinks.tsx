@@ -1,26 +1,28 @@
 "use client";
 
-
+import i18n from "@/lib/i18n";
 import { useAppStore } from "@/store/appStore";
 import { HomeIcon } from "@heroicons/react/20/solid";
-import { ListBulletIcon, TableCellsIcon} from "@heroicons/react/24/outline";
+import { ListBulletIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-
 const Links = [
-  { name: "Inicio", href: "/panel", icon: HomeIcon },
-  { name: "Crear tarea", href: "/panel/create", icon: ListBulletIcon },
-  { name: "Kanban", href: "/panel/kanban", icon: TableCellsIcon },
+  { name: "panel.sidevar.home", href: "/panel", icon: HomeIcon },
+  { name: "panel.sidevar.create", href: "/panel/create", icon: ListBulletIcon },
+  { name: "panel.sidevar.kanban", href: "/panel/kanban", icon: TableCellsIcon },
 ];
 
-
-
 export default function NavLinks() {
-  const {user} = useAppStore();
+  const { user, language } = useAppStore();
   const pathName = usePathname();
 
+  useEffect(() => {
+    if (language) {
+      i18n.changeLanguage(language); // Cambiar idioma cuando el lenguaje se actualiza
+    }
+  }, [language]);
 
   useEffect(() => {
     console.log("user", user);
@@ -44,7 +46,7 @@ export default function NavLinks() {
             aria-label={link.name}
           >
             <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
+            <p className="hidden md:block">{i18n.t(link.name)}</p> {/* Traducción aquí */}
           </Link>
         );
       })}

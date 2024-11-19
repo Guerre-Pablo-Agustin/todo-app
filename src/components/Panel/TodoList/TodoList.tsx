@@ -3,13 +3,20 @@ import { useAppStore } from "@/store/appStore";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
+import i18n from "@/lib/i18n";
+import { Trans } from "react-i18next";
 
 const TodoList = () => {
-  const { todo, deleteTodo, loadTodo } = useAppStore();
+  const { todo, deleteTodo, loadTodo, language } = useAppStore();
 
-  // Sincroniza los datos iniciales con el estado global
   useEffect(() => {
-    loadTodo(); // Sincroniza los datos desde localStorage al estado global
+    if (language) {
+      i18n.changeLanguage(language);
+    }
+  }, [language]);
+
+  useEffect(() => {
+    loadTodo();
   }, [loadTodo]);
 
   const getStatus = (status: string) => {
@@ -36,7 +43,7 @@ const TodoList = () => {
       confirmButtonText: "Sí, eliminar",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteTodo(id); 
+        deleteTodo(id);
         Swal.fire({
           title: "Eliminado",
           text: "La tarea ha sido eliminada.",
@@ -48,15 +55,25 @@ const TodoList = () => {
   };
 
   return (
-    <div>
+    <section>
+      <div className="text-2xl text-center font-bold mb-4">
+        <Trans i18nKey="panel.table.title">Lista de tareas</Trans>
+      </div>
       <table className="w-full table-auto">
         <thead className="text-gray-700 text-sm font-medium uppercase">
           <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Descripción</th>
-            <th>Estado</th>
-            <th>Acciones</th>
+            <th>
+              <Trans i18nKey="panel.table.TodoTitle">Título</Trans>
+            </th>
+            <th>
+              <Trans i18nKey="panel.table.TodoDescription">Descripción</Trans>
+            </th>
+            <th>
+              <Trans i18nKey="panel.table.TodoStatus">Estado</Trans>
+            </th>
+            <th>
+              <Trans i18nKey="panel.table.TodoActions">Acciones</Trans>
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-300">
@@ -73,21 +90,21 @@ const TodoList = () => {
               <td className="text-sm text-center flex gap-2 mx-auto p-2">
                 <Link href={`/panel/edit/${t.id}`}>
                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Editar
+                    <Trans i18nKey="panel.table.TodoEdit">Editar</Trans>
                   </button>
                 </Link>
                 <button
                   onClick={() => handleDelete(t.id)}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                 >
-                  Eliminar
+                  <Trans i18nKey="panel.table.TodoDelete">Eliminar</Trans>
                 </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-    </div>
+    </section>
   );
 };
 

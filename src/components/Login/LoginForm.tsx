@@ -129,14 +129,14 @@ function LoginButton() {
     <button
       className={`${
         pending ? "bg-blue-300" : "bg-blue-500"
-      } flex items-center justify-center rounded-md py-2 mt-4 w-full`}
+      } flex items-center justify-center rounded-md py-2 mt-4 w-full text-white hover:bg-blue-400 shadow-md shadow-blue-500/50 transition-all duration-300 ease-in-out`}
       aria-disabled={pending}
       disabled={pending}
     >
         <Trans i18nKey="login.button">
                 Log in
               </Trans>
-      <ArrowRightIcon className="h-5 w-5 text-gray-50" />
+      <ArrowRightIcon className="h-5 w-5 text-gray-50 " />
     </button>
   );
 }

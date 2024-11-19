@@ -1,9 +1,29 @@
 {
-    "login":{
-        "title": "Todo App",
-         "presentation": "Welcome to the task application. Please login to continue.",
-         "button": "Log in",
-         "labelEmail": "Email",
-         "labelPassword": "Password"
+  "login": {
+    "title": "Todo App",
+    "presentation": "Welcome to the task application. Please login to continue.",
+    "button": "Log in",
+    "labelEmail": "Email",
+    "labelPassword": "Password"
+  },
+
+  "panel": {
+    "sidevar": {
+      "title": "Todo App",
+      "home": "Home",
+      "create": "Create task",
+      "kanban": "Kanban Board",
+      "sesion": "Logout"
+    },
+
+    "table": {
+      "title": "Todo List",
+      "TodoTitle": "Title",
+      "TodoDescription": "Description",
+      "TodoStatus": "Status",
+      "TodoActions": "Actions",
+      "TodoDelete": "Delete",
+      "TodoEdit": "Edit"
     }
+  }
 }
