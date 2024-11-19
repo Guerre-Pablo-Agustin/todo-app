@@ -1,62 +1,68 @@
 "use client";
-import { useAppStore } from '@/store/appStore';
-import { Todo } from '@/types/TodoType';
-import React, { useState } from 'react'
-import Swal from 'sweetalert2';
+import i18n from "@/lib/i18n";
+import { useAppStore } from "@/store/appStore";
+import { Todo } from "@/types/TodoType";
+import React, { useEffect, useState } from "react";
+import { Trans } from "react-i18next";
+import Swal from "sweetalert2";
 
 type Props = {
-    toDo: Todo;
-}
+  toDo: Todo;
+};
 
-const EditForm = (toDo : Props) => {
+const EditForm = (toDo: Props) => {
+  const { editTodo, language } = useAppStore();
 
-    const {  editTodo } = useAppStore();
+  useEffect(() => {
+    if (language) {
+      i18n.changeLanguage(language);
+    }
+  }, [language]);
 
-    console.log("toDo", toDo);
+  console.log("toDo", toDo);
 
-    const todoData = toDo.toDo;
+  const todoData = toDo.toDo;
 
-    const [title, setTitle] = useState(todoData?.title);
-    const [description, setDescription] = useState(todoData?.description);
-    const [status, setStatus] = useState(todoData?.status);
+  const [title, setTitle] = useState(todoData?.title);
+  const [description, setDescription] = useState(todoData?.description);
+  const [status, setStatus] = useState(todoData?.status);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-        if (!title || !description || !status) {
-            Swal.fire({
-                title: "Error",
-                text: "Por favor, rellena todos los campos",
-                icon: "error",
-                confirmButtonText: "Aceptar",
-            });
-            return;
-        }
-
-        const updatedTodo = {
-            title,
-            description,
-            status,
-        };
-
-        editTodo(todoData?.id, updatedTodo);
-
-        Swal.fire({
-            title: "Cambios guardados",
-            text: "Los cambios se han guardado correctamente.",
-            icon: "success",
-            confirmButtonText: "Aceptar",
-        });
-
+    if (!title || !description || !status) {
+      Swal.fire({
+        title: "Error",
+        text: "Por favor, rellena todos los campos",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+      return;
     }
 
+    const updatedTodo = {
+      title,
+      description,
+      status,
+    };
+
+    editTodo(todoData?.id, updatedTodo);
+
+    Swal.fire({
+      title: "Cambios guardados",
+      text: "Los cambios se han guardado correctamente.",
+      icon: "success",
+      confirmButtonText: "Aceptar",
+    });
+  };
 
   return (
     <div>
-        <form onSubmit={handleSubmit}>
+    
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="title" className="block text-sm font-medium mb-1">
-            Título
+            <Trans i18nKey="panel.form.labelTitle">Título</Trans>
           </label>
           <input
             type="text"
@@ -71,7 +77,7 @@ const EditForm = (toDo : Props) => {
             htmlFor="description"
             className="block text-sm font-medium mb-1"
           >
-            Descripción
+            <Trans i18nKey="panel.form.labelDescription">Descripción</Trans>
           </label>
           <textarea
             id="description"
@@ -82,7 +88,7 @@ const EditForm = (toDo : Props) => {
         </div>
         <div className="mb-4">
           <label htmlFor="status" className="block text-sm font-medium mb-1">
-            Estado
+            <Trans i18nKey="panel.form.labelStatus">Estado</Trans>
           </label>
           <select
             id="status"
@@ -97,13 +103,16 @@ const EditForm = (toDo : Props) => {
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Guardar Cambios
+          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-md shadow-blue-500/50"
+         >
+          <Trans i18nKey="panel.form.buttonEdit">
+          Editar tarea
+            </Trans>
+       
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default EditForm
+export default EditForm;

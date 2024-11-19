@@ -25,7 +25,20 @@
              "TodoDelete" : "Eliminar",
              "TodoEdit" : "Editar"
 
+        },
+
+        "form":{
+            "titleCreate": "Crear nueva tarea",
+            "titleEdit": "Editar tarea",
+            "labelTitle": "Título",
+            "labelDescription": "Descripción",
+            "labelStatus": "Estado",
+            "buttonCreate": "Crear tarea",
+            "buttonEdit": "Editar tarea",
+            "buttonBack": "Volver"
         }
+
+        
     }
 
 

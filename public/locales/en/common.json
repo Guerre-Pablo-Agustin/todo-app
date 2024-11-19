@@ -24,6 +24,20 @@
       "TodoActions": "Actions",
       "TodoDelete": "Delete",
       "TodoEdit": "Edit"
+    },
+
+    "form": {
+      "titleCreate": "Create new task",
+      "titleEdit": "Edit task",
+      "labelTitle": "Title",
+      "labelDescription": "Description",
+      "labelStatus": "Status",
+      "buttonCreate": "Create task",
+      "buttonEdit": "Edit task",
+      "buttonBack": "Back"
     }
+
+
+
   }
 }

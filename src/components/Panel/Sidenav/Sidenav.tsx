@@ -3,7 +3,6 @@ import Link from "next/link";
 import NavLinks from "./NavLinks";
 import Image from "next/image";
 
-
 import { useRouter } from "next/navigation";
 import { GlobeAltIcon, PowerIcon } from "@heroicons/react/24/outline";
 import { useAppStore } from "@/store/appStore";
@@ -13,9 +12,8 @@ import i18n from "@/lib/i18n";
 import { Trans } from "react-i18next";
 
 export default function SideNav() {
+  const { user, loaduser, logout, language } = useAppStore();
 
-const {user, loaduser , logout, language} = useAppStore();
-  
   const router = useRouter();
 
   useEffect(() => {
@@ -24,8 +22,7 @@ const {user, loaduser , logout, language} = useAppStore();
     }
   }, [language]);
 
-
- useEffect(() => {
+  useEffect(() => {
     loaduser();
   }, [loaduser]);
 
@@ -37,9 +34,6 @@ const {user, loaduser , logout, language} = useAppStore();
     }
   };
 
-
-
-
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2 ">
       <Link
@@ -47,23 +41,15 @@ const {user, loaduser , logout, language} = useAppStore();
         href="/panel"
       >
         <div className="w-[70%] flex flex-row items-center justify-center">
-       
-        <GlobeAltIcon className="h-12 w-12 rotate-[15deg] text-white" />
-         <p className="hidden md:block text-white font-bold">
-        <Trans i18nKey="panel.sidevar.title">
-          Todo App
-        </Trans>
+          <GlobeAltIcon className="h-12 w-12 rotate-[15deg] text-white" />
+          <p className="hidden md:block text-white font-bold">
+            <Trans i18nKey="panel.sidevar.title">Todo App</Trans>
           </p>
         </div>
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />
-        <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block">
-
-
-
-
-        </div>
+        <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
 
         <div>
           <Header />
@@ -83,7 +69,6 @@ const {user, loaduser , logout, language} = useAppStore();
           <div className="w-12 h-12 bg-gray-300 rounded-full" />
         )}
 
-   
         <button
           onClick={handleLogout}
           type="submit"
@@ -91,7 +76,9 @@ const {user, loaduser , logout, language} = useAppStore();
           aria-label="Sign Out"
         >
           <PowerIcon className="w-6" />
-          <div className="hidden md:block">Cerrar sesión</div>
+          <p className="hidden md:block">
+            <Trans i18nKey="panel.sidevar.sesion">Cerrar sesión</Trans>
+          </p>
         </button>
       </div>
     </div>

@@ -22,10 +22,11 @@ const DraggableTask = ({ task }: { task: Todo }) => {
       style={style}
       {...listeners}
       {...attributes}
-      className="bg-white p-3 rounded-md shadow mb-2"
+      className="bg-white p-3 rounded-md mb-2 shadow-md shadow-blue-500/50 divide-y-2 "
     >
-      <h3 className="font-semibold">{task.title}</h3>
-      <p className="text-gray-600">{task.description}</p>
+      <h3 className="font-semibold py-1 px-2 ">{task.title}</h3>
+      
+      <p className="text-gray-600 py-1 px-2">{task.description}</p>
     </div>
   );
 };

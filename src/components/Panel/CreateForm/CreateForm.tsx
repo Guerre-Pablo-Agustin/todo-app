@@ -2,15 +2,16 @@
 import { useAppStore } from "@/store/appStore";
 import { Todo } from "@/types/TodoType";
 import { useState } from "react";
+import { Trans } from "react-i18next";
 import Swal from "sweetalert2";
 
 const CreateForm = () => {
-  const { addTodo, todo } = useAppStore(); 
+  const { addTodo, todo } = useAppStore();
 
   console.log("todo", todo);
 
   const [newTodo, setnewTodo] = useState<Todo>({
-    id: 0, 
+    id: 0,
     title: "",
     description: "",
     status: "Pendiente",
@@ -30,11 +31,12 @@ const CreateForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const maxId = todo.length > 0 ? Math.max(...todo.map((t: Todo) => t.id)) : 0;
+    const maxId =
+      todo.length > 0 ? Math.max(...todo.map((t: Todo) => t.id)) : 0;
 
     const addnewTodo = {
       ...newTodo,
-      id: maxId + 1, 
+      id: maxId + 1,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -60,11 +62,15 @@ const CreateForm = () => {
 
   return (
     <div className="max-w-md mx-auto mt-8 p-4 border rounded shadow">
-      <h1 className="text-2xl font-bold mb-4">Crear Nueva Tarea</h1>
+      <div>
+        <h2 className="text-2xl font-bold mb-4">
+          <Trans i18nKey="panel.form.titleCreate">Crear Nueva Tarea</Trans>
+        </h2>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="title" className="block text-sm font-medium mb-1">
-            Título
+            <Trans i18nKey="panel.form.labelTitle">Título</Trans>
           </label>
           <input
             type="text"
@@ -80,7 +86,7 @@ const CreateForm = () => {
             htmlFor="description"
             className="block text-sm font-medium mb-1"
           >
-            Descripción
+            <Trans i18nKey="panel.form.labelDescription">Descripción</Trans>
           </label>
           <textarea
             id="description"
@@ -92,7 +98,7 @@ const CreateForm = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="status" className="block text-sm font-medium mb-1">
-            Estado
+            <Trans i18nKey="panel.form.labelStatus">Estado</Trans>
           </label>
           <select
             id="status"
@@ -108,9 +114,9 @@ const CreateForm = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-md shadow-blue-500/50"
         >
-          Crear Tarea
+          <Trans i18nKey="panel.form.buttonCreate">Crear tarea</Trans>
         </button>
       </form>
     </div>

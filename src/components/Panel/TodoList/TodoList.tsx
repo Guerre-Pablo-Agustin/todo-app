@@ -62,6 +62,7 @@ const TodoList = () => {
       <table className="w-full table-auto">
         <thead className="text-gray-700 text-sm font-medium uppercase">
           <tr>
+            <th>#</th>
             <th>
               <Trans i18nKey="panel.table.TodoTitle">Título</Trans>
             </th>
