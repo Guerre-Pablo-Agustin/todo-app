@@ -35,9 +35,13 @@
       "buttonCreate": "Create task",
       "buttonEdit": "Edit task",
       "buttonBack": "Back"
+    },
+
+    "kanbanColumn": {
+      "Pendiente": "Pending",
+      "En progreso": "In Progress",
+      "Completada": "Completed",
+      "NewTask": "New Task"
     }
-
-
-
   }
 }

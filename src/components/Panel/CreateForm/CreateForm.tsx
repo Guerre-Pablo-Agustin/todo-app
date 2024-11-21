@@ -31,12 +31,10 @@ const CreateForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const maxId =
-      todo.length > 0 ? Math.max(...todo.map((t: Todo) => t.id)) : 0;
-
+ 
     const addnewTodo = {
       ...newTodo,
-      id: maxId + 1,
+      id: Date.now(), 
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };

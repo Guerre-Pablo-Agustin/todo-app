@@ -36,9 +36,14 @@
             "buttonCreate": "Crear tarea",
             "buttonEdit": "Editar tarea",
             "buttonBack": "Volver"
-        }
+        },
 
-        
+        "kanbanColumn": {
+            "Pendiente": "Pendiente",
+            "En progreso": "En progreso",
+            "Completada": "Completada",
+            "NewTask": "Nueva tarea"
+          }
     }
 
 
