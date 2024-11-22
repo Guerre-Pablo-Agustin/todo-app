@@ -44,13 +44,12 @@ const TodoList = () => {
     loadTodo();
   }, [loadTodo]);
 
-
   //fecha
   const formatDate = (date: string) => {
     const formatedDate = new Date(date);
     const day = formatedDate.getDate().toString().padStart(2, "0");
-    const month = (formatedDate.getMonth() + 1).toString().padStart(2, "0"); 
-    const year = formatedDate.getFullYear().toString().slice(-2); 
+    const month = (formatedDate.getMonth() + 1).toString().padStart(2, "0");
+    const year = formatedDate.getFullYear().toString().slice(-2);
     return `${day}/${month}/${year}`;
   };
 
@@ -101,54 +100,58 @@ const TodoList = () => {
       </div>
 
       {/* Tabla de tareas */}
-      <table className="w-full table-auto">
-        <thead className="text-gray-700 text-sm font-medium uppercase">
-          <tr>
-            <th>#</th>
-            <th>
-              <Trans i18nKey="panel.table.TodoTitle">Título</Trans>
-            </th>
-            <th>
-              <Trans i18nKey="panel.table.TodoDescription">Descripción</Trans>
-            </th>
-            <th>Fecha</th>
-            <th>
-              <Trans i18nKey="panel.table.TodoStatus">Estado</Trans>
-            </th>
-            <th>
-              <Trans i18nKey="panel.table.TodoActions">Acciones</Trans>
-            </th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-300">
-          {currentTodos.map((t) => (
-            <tr key={t.id}>
-              <td className="text-sm text-center p-2">{t.id}</td>
-              <td className="text-sm text-start p-2">{t.title}</td>
-              <td className="text-sm text-start p-2">{t.description}</td>
-              <td className="text-sm text-center p-2">{formatDate(t.createdAt)}</td>
-              <td className={`text-sm text-center rounded`}>
-                <p className={`${getStatus(t.status)} py-0.5 px-2 rounded`}>
-                  {t.status}
-                </p>
-              </td>
-              <td className="text-sm text-center flex gap-2 items-center justify-center  p-2">
-                <Link href={`/panel/edit/${t.id}`}>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-md shadow-blue-500/50">
-                    <Trans i18nKey="panel.table.TodoEdit">Editar</Trans>
-                  </button>
-                </Link>
-                <button
-                  onClick={() => handleDelete(t.id)}
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow-md shadow-red-500/50"
-                >
-                  <Trans i18nKey="panel.table.TodoDelete">Eliminar</Trans>
-                </button>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="w-full table-auto">
+          <thead className="text-gray-700 text-sm font-medium uppercase">
+            <tr>
+              <th>#</th>
+              <th>
+                <Trans i18nKey="panel.table.TodoTitle">Título</Trans>
+              </th>
+              <th>
+                <Trans i18nKey="panel.table.TodoDescription">Descripción</Trans>
+              </th>
+              <th>Fecha</th>
+              <th>
+                <Trans i18nKey="panel.table.TodoStatus">Estado</Trans>
+              </th>
+              <th>
+                <Trans i18nKey="panel.table.TodoActions">Acciones</Trans>
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="divide-y divide-gray-300">
+            {currentTodos.map((t) => (
+              <tr key={t.id}>
+                <td className="text-sm text-center p-2">{t.id}</td>
+                <td className="text-sm text-start p-2">{t.title}</td>
+                <td className="text-sm text-start p-2">{t.description}</td>
+                <td className="text-sm text-center p-2">
+                  {formatDate(t.createdAt)}
+                </td>
+                <td className={`text-sm text-center rounded`}>
+                  <p className={`${getStatus(t.status)} py-0.5 px-2 rounded`}>
+                    {t.status}
+                  </p>
+                </td>
+                <td className="text-sm text-center flex gap-2 items-center justify-center p-2">
+                  <Link href={`/panel/edit/${t.id}`}>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-md shadow-blue-500/50">
+                      <Trans i18nKey="panel.table.TodoEdit">Editar</Trans>
+                    </button>
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(t.id)}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow-md shadow-red-500/50"
+                  >
+                    <Trans i18nKey="panel.table.TodoDelete">Eliminar</Trans>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {/* Paginación */}
       <div className="flex justify-center items-center mt-4 gap-2">
