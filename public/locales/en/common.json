@@ -2,9 +2,14 @@
   "login": {
     "title": "Todo App",
     "presentation": "Welcome to the task application. Please login to continue.",
+    "presentationRegister": "Welcome to the task application. Please create an account to continue.",
     "button": "Log in",
     "labelEmail": "Email",
-    "labelPassword": "Password"
+    "labelName": "Name",
+    "labelPassword": "Password",
+    "labelConfirmPassword": "Confirm Password",
+    "buttonRegister": "Register",
+    "loginQuestion": "Don't have an account?"
   },
 
   "panel": {

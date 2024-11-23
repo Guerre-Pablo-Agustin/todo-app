@@ -2,9 +2,14 @@
     "login":{
         "title": "App de tareas",
          "presentation": "Bienvenido a la aplicación de tareas. Por favor, inicie sesión para continuar.",
+         "presentationRegister": "Bienvenido a la aplicación de tareas. Por favor, cree una cuenta para continuar.",
          "button": "Iniciar sesión",
          "labelEmail": "Correo",
-         "labelPassword": "Contraseña"
+         "laberName": "Nombre",
+         "labelPassword": "Contraseña",
+         "labelConfirmPassword": "Confirmar contraseña",
+         "buttonRegister": "Registrar",
+         "loginQuestion": "¿No tienes una cuenta?"
     },
 
     "panel":{

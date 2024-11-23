@@ -10,6 +10,7 @@ interface AppStore {
   login: (mail: string, password: string) => boolean;
   logout: () => void;
   loaduser: () => void;
+  createUser: (user: User) => void;
 
   // todos
   todo: Todo[];
@@ -30,16 +31,39 @@ export const useAppStore = create<AppStore>((set) => ({
   todo: [],
   language: "en",
 
-  //language
+  // Language
   setLanguage: (lang) => set({ language: lang }),
 
-  //user
+  // User
+  createUser: (newUser) => {
+    set(() => {
+      const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+      const allUsers = [...data.users, ...existingUsers];
+  
+      const userExists = allUsers.some(
+        (user: User) => user.email === newUser.email
+      );
+  
+      if (userExists) {
+        throw new Error("El usuario ya existe con este correo electrónico.");
+      }
+  
+      const updatedUsers = [...existingUsers, newUser];
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+  
+      return {};
+    });
+  },
+  
   setUser: (user) => set({ user }),
+
   login: (email, password) => {
     try {
-      console.log("email", email, "password", password);
-      const foundUser = data.users.find(
-        (user) => user.email === email && user.password === password
+      const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+      const allUsers = [...data.users, ...existingUsers]; 
+  
+      const foundUser = allUsers.find(
+        (user: User) => user.email === email && user.password === password
       );
   
       if (foundUser) {
@@ -48,12 +72,13 @@ export const useAppStore = create<AppStore>((set) => ({
         return true;
       }
   
-      return false; 
+      return false;
     } catch (error) {
-      console.error("Error en el login:", error); 
+      console.error("Error en el login:", error);
       return false;
     }
   },
+  
 
   loaduser: () => {
     const user = localStorage.getItem("user");
@@ -61,13 +86,13 @@ export const useAppStore = create<AppStore>((set) => ({
       set({ user: JSON.parse(user) });
     }
   },
-  
+
   logout: () => {
     localStorage.removeItem("user");
     set({ user: null });
   },
 
-  //todos
+  // Todos
   setTodo: (todo) => {
     set({ todo });
     localStorage.setItem("todos", JSON.stringify(todo));
@@ -76,21 +101,21 @@ export const useAppStore = create<AppStore>((set) => ({
   loadTodo: () => {
     const todos = localStorage.getItem("todos");
     if (todos) {
-      set({ todo: JSON.parse(todos) }); 
+      set({ todo: JSON.parse(todos) });
     } else {
-      set({ todo: data.todos }); 
+      set({ todo: data.todos });
     }
   },
 
-
   addTodo: (todo) => {
     set((state) => {
-      const updatedTodo = [...state.todo, todo]; // Usa el estado actual
-      localStorage.setItem("todos", JSON.stringify(updatedTodo)); // Actualiza localStorage
-      return { todo: updatedTodo }; // Actualiza el estado
+      const updatedTodo = [...state.todo, todo];
+      localStorage.setItem("todos", JSON.stringify(updatedTodo));
+      return { todo: updatedTodo };
     });
   },
-  editTodo: (id ,updatedTodo) => {
+
+  editTodo: (id, updatedTodo) => {
     set((state) => {
       const updatedTodos = state.todo.map((todo) =>
         todo.id === id ? { ...todo, ...updatedTodo } : todo
@@ -99,7 +124,7 @@ export const useAppStore = create<AppStore>((set) => ({
       return { todo: updatedTodos };
     });
   },
-  
+
   deleteTodo: (id) => {
     set((state) => {
       const updatedTodos = state.todo.filter((todo) => todo.id !== id);
@@ -108,3 +133,4 @@ export const useAppStore = create<AppStore>((set) => ({
     });
   },
 }));
+

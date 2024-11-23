@@ -34,6 +34,8 @@ export default function SideNav() {
     }
   };
 
+  console.log("user", user);
+
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2 ">
       <Link
@@ -56,7 +58,7 @@ export default function SideNav() {
         </div>
 
         {user && user.image ? (
-          <div className="flex  p-3 md:p-2 md:px-3">
+          <div className="flex gap-2 p-3 md:p-2 md:px-3">
             <Image
               src={user?.image}
               alt="Profile"
@@ -64,6 +66,7 @@ export default function SideNav() {
               height={50}
               className="rounded-full hidden md:block"
             />
+            <p className="flex items-center justify-center font-bold">{user?.name}</p>
           </div>
         ) : (
           <div className="w-12 h-12 bg-gray-300 rounded-full" />

@@ -12,21 +12,7 @@ export const data: {
       email: "admin@example.com",
       password: "password123",
       image: "/images/avatars/hombre.jpg",
-    },
-    {
-      id: 2,
-      name: "Ana Gómez",
-      email: "ana.gomez@example.com",
-      password: "password456",
-      image: "https://randomuser.me/api/portraits/women/1.jpg",
-    },
-    {
-      id: 3,
-      name: "Carlos Sánchez",
-      email: "carlos.sanchez@example.com",
-      password: "password789",
-      image: "https://randomuser.me/api/portraits/men/2.jpg",
-    },
+    }
   ],
   todos: [
     {
