@@ -7,6 +7,7 @@ import DroppableColumn from "./DroppableColumn";
 import DraggableTask from "./DraggableTask";
 import { useState } from "react";
 import NewTaskForm from "./NewTaskForm";
+import { AnimatePresence } from "motion/react";
 
 const KanbanBoard = () => {
   const { todo, setTodo } = useAppStore();
@@ -67,14 +68,16 @@ const KanbanBoard = () => {
          
         }}
         >
-         
+          
           <SortableContext
-            items={getTasksByStatus(status).map((task) => task.id)}
-            strategy={verticalListSortingStrategy}
+          items={getTasksByStatus(status).map((task) => task.id)}
+          strategy={verticalListSortingStrategy}
           >
+            <AnimatePresence>
             {getTasksByStatus(status).map((task) => (
               <DraggableTask key={task.id} task={task} />
             ))}
+            </AnimatePresence>
           </SortableContext>
         </DroppableColumn>
       ))}

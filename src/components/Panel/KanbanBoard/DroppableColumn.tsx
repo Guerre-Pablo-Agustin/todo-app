@@ -1,5 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 import { Trans } from "react-i18next";
+import { motion } from "motion/react";
 
 const DroppableColumn = ({
   id,
@@ -30,10 +31,17 @@ const DroppableColumn = ({
 
 
   return (
-    <div
+    <motion.div
+    initial={{ height: 300 }} 
+    animate={{ height: `auto` }} 
+    transition={{
+      type: "spring",
+      stiffness: 200,
+      damping: 20,
+    }}
       ref={setNodeRef}
       className="w-full md:w-1/3 bg-gray-100 border-2 border-gray-300 p-4 rounded-md min-h-[300px]
-      shadow-md shadow-gray-500/50 "
+      shadow-md shadow-gray-500/50 " 
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex gap-2 items-center">
@@ -49,8 +57,11 @@ const DroppableColumn = ({
           +  <Trans i18nKey="panel.kanbanColumn.NewTask">Nueva tarea</Trans>
         </button>
       </div>
+      <div className="">
+
       {children}
-    </div>
+      </div>
+    </motion.div>
   );
 };
 
