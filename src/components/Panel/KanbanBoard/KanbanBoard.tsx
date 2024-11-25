@@ -51,15 +51,20 @@ const KanbanBoard = () => {
 
   const getTasksByStatus = (status: string) => todo.filter((task) => task.status === status);
 
-  console.log("todo", todo);
+ 
 
   return (
     <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
     <div className="flex flex-col  md:flex-row  gap-4 mx-auto">
       {["Pendiente", "En progreso", "Completada"].map((status) => (
-        <DroppableColumn key={status} id={status} onAddTaskClick={() => {
+        <DroppableColumn 
+        key={status} 
+        id={status}  
+        taskCount={getTasksByStatus(status).length} 
+        onAddTaskClick={() => {
           setNewTask({ ...newTask, status });
           setShowForm(true);
+         
         }}
         >
          

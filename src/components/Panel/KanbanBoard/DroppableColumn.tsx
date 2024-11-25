@@ -5,12 +5,29 @@ const DroppableColumn = ({
   id,
   children,
   onAddTaskClick,
+  taskCount
 }: {
   id: string;
   children: React.ReactNode;
   onAddTaskClick: () => void;
+  taskCount: number;
 }) => {
   const { setNodeRef } = useDroppable({ id });
+
+
+  const taskColor = (status: string) => {
+    switch (status) {
+      case "Pendiente":
+        return "bg-green-500";
+      case "En progreso":
+        return "bg-yellow-500";
+      case "Completada":
+        return "bg-purple-500";
+      default:
+        return "bg-gray-500";
+    }
+  };
+
 
   return (
     <div
@@ -19,12 +36,15 @@ const DroppableColumn = ({
       shadow-md shadow-gray-500/50 "
     >
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold">
+        <div className="flex gap-2 items-center">
+        <p className="text-lg font-bold font-serif">
           <Trans i18nKey={`panel.kanbanColumn.${id}`}>{id}</Trans>
-        </h2>
+        </p>
+      <p className={`text-sm text-white font-bold font-serif rounded-full px-2 py-1 ${taskColor(id)}`}>{taskCount}</p>
+        </div>
         <button
           onClick={onAddTaskClick}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md shadow-blue-500/50 hover:bg-blue-600 transition-all duration-300 ease-in-out"
+          className="bg-blue-500 text-white px-2 py-1 rounded-md shadow-md shadow-blue-500/50 hover:bg-blue-600 transition-all duration-300 ease-in-out font-serif"
         >
           +  <Trans i18nKey="panel.kanbanColumn.NewTask">Nueva tarea</Trans>
         </button>
