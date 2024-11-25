@@ -2,7 +2,12 @@
 import Logo from "@/components/Login/AppLogo";
 import Header from "@/components/Login/Header";
 import LoginForm from "@/components/Login/LoginForm";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: 'ToDo App Login',
+  description: 'Login page for ToDo App',
+};
 
 export default function LoginPage() {
 
