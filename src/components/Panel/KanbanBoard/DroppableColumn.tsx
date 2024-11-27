@@ -40,7 +40,7 @@ const DroppableColumn = ({
       damping: 20,
     }}
       ref={setNodeRef}
-      className="w-full md:w-1/3 bg-gray-100 border-2 border-gray-300 p-4 rounded-md min-h-[300px]
+      className="w-full bg-gray-100 border-2 border-gray-300 p-4 rounded-md min-h-[300px]
       shadow-md shadow-gray-500/50 " 
     >
       <div className="flex items-center justify-between mb-4">

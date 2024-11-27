@@ -56,7 +56,7 @@ const KanbanBoard = () => {
 
   return (
     <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
-    <div className="flex flex-col  md:flex-row  gap-4 mx-auto">
+    <div className="grid gap-3 mx-auto grid-cols-1  lg:grid-cols-3">
       {["Pendiente", "En progreso", "Completada"].map((status) => (
         <DroppableColumn 
         key={status} 
