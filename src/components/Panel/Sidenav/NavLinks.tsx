@@ -20,7 +20,7 @@ export default function NavLinks() {
 
   useEffect(() => {
     if (language) {
-      i18n.changeLanguage(language); // Cambiar idioma cuando el lenguaje se actualiza
+      i18n.changeLanguage(language);
     }
   }, [language]);
 
@@ -46,7 +46,7 @@ export default function NavLinks() {
             aria-label={link.name}
           >
             <LinkIcon className="w-6" />
-            <p className="hidden md:block">{i18n.t(link.name)}</p> {/* Traducción aquí */}
+            <p className="hidden md:block">{i18n.t(link.name)}</p>
           </Link>
         );
       })}

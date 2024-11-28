@@ -92,7 +92,7 @@ const DraggableTask = ({
             <h3 className="font-semibold text-sm py-1 px-2">{task.title}</h3>
           </div>
           <button
-            ref={trashRef} // Referencia al botón
+            ref={trashRef}
             onClick={(e) => handleDelete(e, task.id)}
             className="bg-red-500 text-white px-2 py-1 rounded-md shadow-md shadow-red-500/50 hover:bg-red-600 transition-all duration-300 ease-in-out"
           >
