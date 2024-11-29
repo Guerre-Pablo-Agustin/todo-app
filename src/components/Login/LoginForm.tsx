@@ -1,6 +1,6 @@
 "use client";
 
-import { AtSymbolIcon, KeyIcon } from "@heroicons/react/24/outline";
+import { AtSymbolIcon, EyeIcon, KeyIcon } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { useFormStatus } from "react-dom";
 import { lusitana } from "@/app/ui/fonts";
@@ -10,9 +10,11 @@ import { useRouter } from "next/navigation";
 import i18n from "../../lib/i18n";
 import { Trans } from "react-i18next";
 import Link from "next/link";
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 
 export default function LoginForm() {
   const { language } = useAppStore();
+  const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -83,29 +85,43 @@ export default function LoginForm() {
             </div>
           </div>
           <div className="mt-4">
-            <label
-              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-              htmlFor="password"
-            >
-              <Trans i18nKey="login.labelPassword"></Trans>
-            </label>
-            <div className="relative">
-              <input
-                className="peer  text-black  block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Enter password"
-                value={userData.password}
-                onChange={(e) =>
-                  setUserData({ ...userData, password: e.target.value })
-                }
-                required
-                minLength={6}
-              />
-              <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-            </div>
-          </div>
+  <label
+    className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+    htmlFor="password"
+  >
+    <Trans i18nKey="login.labelPassword">Password</Trans>
+  </label>
+  <div className="relative">
+    <input
+      className="peer text-black block w-full rounded-md border border-gray-200 py-[9px] pl-10 pr-10 text-sm outline-2 placeholder:text-gray-500"
+      id="password"
+      type={showPassword ? "text" : "password"}
+      name="password"
+      placeholder="Enter password"
+      value={userData.password}
+      onChange={(e) =>
+        setUserData({ ...userData, password: e.target.value })
+      }
+      required
+      minLength={6}
+    />
+    <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+
+   
+    <button
+      type="button"
+      onClick={() => setShowPassword(!showPassword)}
+      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none "
+      aria-label={showPassword ? "Hide password" : "Show password"}
+    >
+      {showPassword ? (
+      <RiEyeLine className="w-5 h-5 "/>
+      ) : (
+        <RiEyeCloseLine className="w-5 h-5 "/>
+      )}
+    </button>
+  </div>
+</div>
         </div>
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <LoginButton />
