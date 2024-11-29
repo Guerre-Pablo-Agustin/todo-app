@@ -1,6 +1,6 @@
 "use client";
 
-import { AtSymbolIcon, EyeIcon, KeyIcon } from "@heroicons/react/24/outline";
+import { AtSymbolIcon, KeyIcon } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { useFormStatus } from "react-dom";
 import { lusitana } from "@/app/ui/fonts";
